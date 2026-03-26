@@ -1,30 +1,52 @@
 /**
- * HelloApp.java - A simple Java application that Displays "Hello, World!" to
- * the console with a Command-Line Argument or Default Message.
+ * HelloApp.java - A simple Java application that greets multiple users by name if
+ * provided as command-line arguments, or defaults to greeting "World" if no names are given.
  *
- * This is the third step in the HelloApp journey, where we enhance UC2 by
- * adding a default value of "World" when no command-line argument is provided.
- * The application uses a ternary operator to assign the name based on argument
- * availability, making the program more robust and user-friendly.
+ * Greet Multiple Users - The application should accept multiple names as command-line
+ * arguments and display a personalized greeting for each user.
+ * Usage: java HelloApp [name1] [name2] ... [nameN]
+ * - If names are provided, it will display "Hello, [Name1], [Name2], ...!" to the console.
+ * - If no names are provided, it will display "Hello, World!"
  *
  * @author 7kshay
- * @version 3.0
+ * @version 4.0
+ * @since UC1
  */
 
-/**
- * Key Java Concepts Used:
- * 1. Default Values - Fallback value "World" when no input is given
- * 2. Command-Line Arguments - Accessing user input via args[] parameter
- * 3. Ternary Operator - Concise way to assign values based on a condition
- * 4. Array Length - Checking number of command-line arguments
- * 5. String Concatenation - Using + operator to combine strings
- */
+// Key Concepts for HelloApp UC4:
+// 1. Default Values: Providing a fallback value when no input is given
+// 2. Command-line Arguments: Accessing user input via args[] parameter
+// 3. Conditional Statements: Using if to check conditions
+// 4. Boolean Logic: Using logical conditions to control flow
+// 5. Array Length: Checking the number of command-line arguments
+// 6. StringBuilder: Efficiently building a string from multiple parts
+// 7. Looping Constructs: Using for loops to iterate through command-line arguments
+// 8. String Concatenation: Joining multiple strings with a delimiter (comma and space)
 
 public class HelloApp {
     public static void main(String[] args) {
 
-        // Use ternary operator to assign name based on argument availability
-        String name = (args.length > 0) ? args[0] : "World";
+        // Declare name variable
+        String name;
+
+        // Check if command-line arguments are provided
+        if (args.length > 0) {
+
+            // Use StringBuilder to efficiently build the names string
+            StringBuilder nameBuilder = new StringBuilder();
+
+            for (int i = 0; i < args.length; i++) {
+                nameBuilder.append(args[i]);
+                if (i < args.length - 1) {
+                    nameBuilder.append(", ");
+                }
+            }
+
+            name = nameBuilder.toString();
+        } else {
+            // Default to "World" if no arguments are provided
+            name = "World";
+        }
 
         // Display personalized greeting
         System.out.println("Hello, " + name + "!");
@@ -34,5 +56,6 @@ public class HelloApp {
 
 **Output:**
 ```
-java HelloApp Alice  →  Hello, Alice!
-java HelloApp       →  Hello, World!
+java HelloApp Alice Bob Charlie  →  Hello, Alice, Bob, Charlie!
+java HelloApp John               →  Hello, John!
+java HelloApp                    →  Hello, World!
